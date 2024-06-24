@@ -1,0 +1,77 @@
+-MongoDBCompass connessione nodo con advanced -> direct connection
+-poi add collection -> additional preferences
+
+
+cluster riak (sez. 'exec' del nodo principale)
+riak start
+riak-admin cluster join riak@INDIRIZZO_NODO
+riak-admin cluster plan
+riak-admin cluster commit
+riak-admin status
+
+
+da salvare nel database, per ogni libro:
+-title
+-authors.name
+	-prezzo		(questi tre con valori finti)
+	-valutazione media
+	-disponibilità
+-cover
+-isbn
+
+per il singolo libro si fa chiamata API get che prende tutti i valori(ma non li salva sul database)
+
+per relazione:
+spiegare perchè Riak e Mongo
+come abbiamo creato i database e i cluster
+perchè ReplicaSet in Mongo e no sharding
+sia utenti che libri solo a livello locale di cluster(Paese)
+descruvere dominio e attori
+
+
+------------email Poccia------------
+
+-- Sito che gestisce acquisti o noleggi di libri -film
+
+librerie hanno un id geografico una lingua e un a caratterizazione
+nelle librerie ci sono i libri
+gli utenti acquistano i libri  e li possono ricercare  usando la oingua. gli utenti hanno una  regione si pr3ferisce che  un nodo della stessa regione risponda rispetto ad un nodo  di una regione lntana
+
+------------Appunti Pasquale------------
+Si sta parlando di un database che comprende le librerie distribuite geograficamente , abbiamo quindi la necessità di effettuare uno sharding in base all'area geografica di questi "magazzini" creare un suggeritore usando riak con gli abstract dei libri per recuperare libri simili 
+creare un suggeritore usando riak con gli abstract dei libri per recuperare libri simili Quando un utente ha noleggiato determinati libri -> suggerisco determinati libri -> riak avrà bisogno del catalogo dei libri con una chiave codificata in un certo modo, secondo magari la libreria più vicina o valutando i libri più nuovi. 
+Per quanto riguarda lo storico di acquisti o noleggi dei clienti -> column store Quando un utente noleggia un libro -> descrivere e rendere operativo il flusso di noleggio/acquisto , con opportuno partizionamento dei dati per quanto riguarda gli attori in gioco dobbiamo quindi considerare anche l'entità libreria 
+docker è consigliabile 
+
+------------Appunti Alberto------------
+Descrivere l'utente che fa l'acquisto
+Flusso del noleggio del libro/film
+
+Durata, lungezza, ecc
+Abstract, passarlo con chatgpt e recuperare libri simili per fare suggerimenti
+
+Catalogo libri della libreria
+Invertedindex(?)
+Id geografico -> Lingua 
+Quindi si gestisce in modo geografico
+La libreria è una specie di magazzino
+Si gestiscono LE librerie
+I libri verranno spediti per posta -> gestire la consistenza 
+
+Opzione ebook? Serve? Cosa cambia?
+Attenzione errore da non fare: se gestissi una singola libreria andrebbe bene un sito monoblocco( non servirebbe nosql)
+
+"Libreria in germania starà in un nodo in germania"
+Email
+Descrivere il dominio
+Descrivere gli attori
+
+Portabilità e scalabilità
+Consistency level
+Che tipo di consistenza
+(domande orale)
+Altri db
+CAP theorem
+
+Riak per la cache(?)
+Mongodb storico di tutti gli utenti
