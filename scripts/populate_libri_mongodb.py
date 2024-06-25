@@ -25,10 +25,10 @@ def get_books_data(isbn_list):
             if key in data:
                 book_data = data[key]
                 filtered_data = {
-                    "title": book_data.get("title", "No title available"),
-                    "authors": [author["name"] for author in book_data.get("authors", [])],
-                    "cover": book_data.get("cover", {}).get("large", "No cover available"),
-                    "isbn": isbn,
+                    "titolo": book_data.get("title", "No title available"),
+                    "autori": [author["name"] for author in book_data.get("authors", [])],
+                    "copertina": book_data.get("cover", {}).get("large", "No cover available"),
+                    "ISBN": isbn,
                     "prezzo": round(random.uniform(5.0, 50.0), 2),  # Prezzo casuale tra 5.0 e 50.0
                     "valutazione_media": round(random.uniform(1.0, 5.0), 1),  # Valutazione casuale tra 1.0 e 5.0
                     "disponibilità": random.randint(0, 100)  # Disponibilità casuale tra 0 e 100
@@ -40,7 +40,6 @@ def get_books_data(isbn_list):
 # Lista di ISBN per esempio
 isbn_list = ["0451526538", "0451524934", "9780140328721", "9780439139595", "9780439064873", "9780439136365"]
 
-# Ottieni i dati
 books_data = get_books_data(isbn_list)
 
 # Inserisci i dati in MongoDB
