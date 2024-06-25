@@ -9,7 +9,7 @@ collection = db['libri']
 # Funzione per ottenere dati sui libri dall'API di Open Library
 def get_books_data(isbn_list):
     base_url = "https://openlibrary.org/api/books"
-    books_data = []
+    books_data = [ ]
 
     for isbn in isbn_list:
         url = f"{base_url}?bibkeys=ISBN:{isbn}&jscmd=data&format=json"
