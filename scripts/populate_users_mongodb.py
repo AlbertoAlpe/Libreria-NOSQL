@@ -3,7 +3,7 @@ from faker import Faker
 import random
 
 # Configurazione MongoDB
-uri = "mongodb://localhost:27022/?directConnection=true"  #stringa di connessione di MongoDBCompass
+uri = "mongodb://localhost:27023/?directConnection=true"  #stringa di connessione di MongoDBCompass
 client = MongoClient(uri)
 db = client['lib-fra']  # modificare il database: lib-ita, lib-ger, lib-fra
 collection = db['utenti']

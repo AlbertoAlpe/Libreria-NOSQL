@@ -1,11 +1,12 @@
-to do:
-bucket riak
-connettere mongo e riak
-raccolta acquisti
-abstract gpt
-finire relazione
+To do:
+-bucket riak
+-impostare quorum 
+-connettere mongo e riak
+-raccolta acquisti
+-abstract gpt
+-finire relazione
 
-
+---------------------
 
 -MongoDBCompass connessione nodo con advanced -> direct connection
 -poi add collection -> additional preferences
@@ -21,7 +22,7 @@ riak-admin status
 
 RIAK
 indirizzo:porta/riak/bucket/key
-		/riak/documents/1   -> accede al documento con chiave 1
+	es.	/riak/documents/1   -> legge il documento con chiave 1 nel bucket 'documents' 
 
 Bucket=documents
 key=1
