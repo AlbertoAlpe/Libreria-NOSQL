@@ -1,3 +1,12 @@
+to do:
+bucket riak
+connettere mongo e riak
+raccolta acquisti
+abstract gpt
+finire relazione
+
+
+
 -MongoDBCompass connessione nodo con advanced -> direct connection
 -poi add collection -> additional preferences
 
@@ -8,6 +17,33 @@ riak-admin cluster join riak@INDIRIZZO_NODO
 riak-admin cluster plan
 riak-admin cluster commit
 riak-admin status
+
+
+RIAK
+indirizzo:porta/riak/bucket/key
+		/riak/documents/1   -> accede al documento con chiave 1
+
+Bucket=documents
+key=1
+{"document content": "mamma told me to go home"}
+------------------
+Bucket=words
+key = mamma
+{"category": "noun", "count":2}
+
+InvertedIndex
+Bucket: inverted_index
+
+Chiave: "termine1"
+Valore: ["documento1", "documento2", ...]
+
+Chiave: "termine2"
+Valore: ["documento2", "documento3", ...]
+
+key=magia
+{"titolo": "harry potter 1", "titolo": "...", } 
+
+---------------------------------------------
 
 
 da salvare nel database, per ogni libro:
