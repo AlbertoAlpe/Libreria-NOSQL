@@ -4,8 +4,8 @@ from faker import Faker
 import random
 
 # Connetti a MongoDB
-client = MongoClient('mongodb://localhost:27017/?directConnection=true')
-db = client['lib-ita']
+client = MongoClient('mongodb://localhost:27025/?directConnection=true')
+db = client['lib-fra']
 collection = db['libri']
 
 # Generatore di dati fittizi
@@ -29,9 +29,9 @@ def get_books_data(isbn_list):
                     "autori": [author["name"] for author in book_data.get("authors", [])],
                     "copertina": book_data.get("cover", {}).get("large", "No cover available"),
                     "ISBN": isbn,
-                    "prezzo": round(random.uniform(5.0, 50.0), 2),  # Prezzo casuale tra 5.0 e 50.0
-                    "valutazione_media": round(random.uniform(1.0, 5.0), 1),  # Valutazione casuale tra 1.0 e 5.0
-                    "disponibilità": random.randint(0, 100)  # Disponibilità casuale tra 0 e 100
+                    "prezzo": round(random.uniform(5.0, 50.0), 2),
+                    "valutazione_media": round(random.uniform(1.0, 5.0), 1),
+                    "disponibilità": random.randint(0, 1000)
                 }
                 books_data.append(filtered_data)
     

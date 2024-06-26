@@ -18,7 +18,12 @@ def get_book_data_from_api(isbn):
             title = book_data.get('title', 'N/A')
             authors = [author['name'] for author in book_data.get('authors', [])]
             cover = book_data.get('cover', {}).get('large', 'N/A')
-            return title, authors, cover
+            publishers = [publisher['name'] for publisher in book_data.get('publishers', [])]
+            language = book_data.get('languages', {})
+            number_of_pages = book_data.get('number_of_pages', {})
+            publish_date = book_data.get('publish_date', {})
+            
+            return title, authors, cover, publishers, language, number_of_pages, publish_date
         else:
             print(f"No data found for ISBN {isbn}")
             return None
@@ -45,10 +50,14 @@ def get_book_data_from_mongodb(isbn):
 def main(isbn):
     api_data = get_book_data_from_api(isbn)
     if api_data:
-        title, authors, cover = api_data
-        print(f"Title: {title}")
-        print(f"Authors: {', '.join(authors)}")
-        print(f"Cover: {cover}")
+        title, authors, cover, publishers, language, number_of_pages, publish_date = api_data
+        print(f"Titolo: {title}")
+        print(f"Autori: {', '.join(authors)}")
+        print(f"Copertina: {cover}")
+        print(f"Editore: {publishers}")
+        print(f"Lingua: {language}")
+        print(f"N.Pagine: {number_of_pages}")
+        print(f"Anno di pubblicazione: {publish_date}") 
     
     db_data = get_book_data_from_mongodb(isbn)
     if db_data:
@@ -58,5 +67,5 @@ def main(isbn):
         print(f"Availability: {availability}")
 
 if __name__ == "__main__":
-    isbn = "9780140328721"
+    isbn = "0451526538"
     main(isbn)
