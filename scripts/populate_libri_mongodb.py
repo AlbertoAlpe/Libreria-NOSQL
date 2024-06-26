@@ -4,7 +4,7 @@ from faker import Faker
 import random
 
 # Connetti a MongoDB
-client = MongoClient('mongodb://localhost:27019/?directConnection=true')
+client = MongoClient('mongodb://localhost:27017/?directConnection=true')
 db = client['lib-ita']
 collection = db['libri']
 

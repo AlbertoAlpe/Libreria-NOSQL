@@ -27,12 +27,12 @@ def get_book_data_from_api(isbn):
         return None
 
 def get_book_data_from_mongodb(isbn):
-    client = MongoClient('mongodb://localhost:27019/?directConnection=true')
-    db = client['your_database_name']  # Sostituisci con il nome del tuo database
+    client = MongoClient('mongodb://localhost:27017/?directConnection=true')
+    db = client['lib-ita']  # Sostituisci con il nome del tuo database
     collection = db['libri']
     
     # Trova il libro con l'ISBN specificato all'interno di identifiers.isbn_10
-    book_data = collection.find_one({'identifiers.isbn_10': isbn})
+    book_data = collection.find_one({'ISBN': isbn})
     if book_data:
         price = book_data.get('prezzo', 'N/A')
         average_rating = book_data.get('valutazione_media', 'N/A')
@@ -58,5 +58,5 @@ def main(isbn):
         print(f"Availability: {availability}")
 
 if __name__ == "__main__":
-    isbn = "0451526538"
+    isbn = "9780140328721"
     main(isbn)
