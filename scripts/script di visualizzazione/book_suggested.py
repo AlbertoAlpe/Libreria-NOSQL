@@ -59,7 +59,7 @@ def get_keywords_and_isbns_from_riak(word):
         return []
 
 # Funzione principale per eseguire l'integrazione
-def main():
+def main(libri_collection):
     # Ottieni la lista di ISBN da MongoDB
     isbn_list = get_isbn_list_from_mongodb()
     print('ISBN dei libri trovati:', isbn_list)
@@ -120,14 +120,18 @@ def main():
     # Trova i 5 ISBN che compaiono più frequentemente
     top_isbns = sorted(isbn_count_map.items(), key=lambda item: item[1], reverse=True)[:5]
 
-    # Stampare i risultati
-    print("\nMappa completa delle parole chiave e degli ISBN associati:")
-    for isbn, count in isbn_count_map.items():
-        print(f"ISBN '{isbn}': {count} volte")
-
-    print("\nTop 5 ISBN che compaiono più frequentemente (escluso gli ISBN originali):")
+    # Stampa i titoli dei libri associati ai top 5 ISBN più frequenti
+    print("\nTop 5 libri che compaiono più frequentemente:")
     for isbn, count in top_isbns:
-        print(f"ISBN '{isbn}': {count} volte")
+        # Ottieni il titolo del libro associato all'ISBN
+        try:
+            titolo = libri_collection.find_one({"ISBN": isbn}).get('titolo')
+            print(f"Titolo: {titolo}, ISBN: {isbn}, Frequenza: {count} volte")
+        except AttributeError:
+            print(f"ISBN: {isbn}, Frequenza: {count} volte (Titolo non disponibile)")
 
 if __name__ == "__main__":
-    main()
+    client = MongoClient(mongodb_url)
+    db = client['lib-ita']
+    libri_collection = db['libri']
+    main(libri_collection)
