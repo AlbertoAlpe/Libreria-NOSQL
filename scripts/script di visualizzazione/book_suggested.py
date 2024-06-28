@@ -4,7 +4,7 @@ from bson import ObjectId
 
 # URL di connessione a MongoDB con replica set specificato
 mongodb_url = 'mongodb://libreria1:27017,libreria2:27017,libreria3:27017/?replicaSet=ReplicaSetItalia'
-riak_url = 'http://localhost:32768'
+riak_url = 'http://localhost:8098'
 
 # Funzione per ottenere la lista di ISBN dai libri con payment_made=True da MongoDB
 def get_isbn_list_from_mongodb():
@@ -13,7 +13,7 @@ def get_isbn_list_from_mongodb():
     ordini_collection = database['ordini']  # Collezione degli ordini
     libri_collection = database['libri']  # Collezione dei libri
 
-    user_id = ObjectId("667ee3022226031cfd4ac153")  # ObjectID dell'utente da cercare (hardcodato)
+    user_id = ObjectId("667edc22a9607211554caabc")  # ObjectID dell'utente da cercare (hardcodato)
 
     isbn_list = []
 

@@ -35,7 +35,7 @@ def create_inverted_index(abstract):
 
 # Funzione per inserire o aggiornare l'inverted index in Riak con una lista di ISBN
 def update_inverted_index(word, isbn_list):
-    url = f"http://localhost:32768/riak/InvertedIndex/{word}"
+    url = f"http://localhost:8098/riak/InvertedIndex/{word}"
     headers = {'Content-Type': 'application/json'}
     
     try:
