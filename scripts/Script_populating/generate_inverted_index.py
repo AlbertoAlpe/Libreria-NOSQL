@@ -24,7 +24,8 @@ def create_inverted_index(abstract):
     stop_words = set(stopwords.words('english'))
     ps = PorterStemmer()
     filtered_tokens = [ps.stem(word) for word in tokens if word.isalnum() and word.lower() not in stop_words]
-    
+    filtered_tokens.append("prova")
+    filtered_tokens.append("prova2")
     inverted_index = defaultdict(set)  # Utilizziamo un set invece di una lista per evitare duplicati di ISBN
     
     for idx, word in enumerate(filtered_tokens):
