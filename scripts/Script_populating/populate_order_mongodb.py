@@ -46,7 +46,7 @@ def generate_order():
     return order
 
 # Genera e inserisci ordini
-num_orders_to_generate = 5  # Numero di ordini da generare
+num_orders_to_generate = 100  # Numero di ordini da generare
 orders = [generate_order() for _ in range(num_orders_to_generate)]
 
 # Inserisci i dati in MongoDB
