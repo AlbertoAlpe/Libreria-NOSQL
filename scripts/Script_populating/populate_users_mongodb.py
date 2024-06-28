@@ -3,9 +3,9 @@ from faker import Faker
 import random
 
 # Configurazione MongoDB
-uri = "mongodb://localhost:27023/?directConnection=true"  #stringa di connessione di MongoDBCompass
+uri = "mongodb://libreria1:27017,libreria2:27017,libreria3:27017/?replicaSet=ReplicaSetItalia"  #stringa di connessione di MongoDBCompass
 client = MongoClient(uri)
-db = client['lib-fra']  # modificare il database: lib-ita, lib-ger, lib-fra
+db = client['lib-ita']  # modificare il database: lib-ita, lib-ger, lib-fra
 collection = db['utenti']
 
 # Generatore di dati fittizi

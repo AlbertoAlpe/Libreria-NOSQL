@@ -1,3 +1,4 @@
+from pymongo import MongoClient
 import requests
 import nltk
 from collections import defaultdict
@@ -79,9 +80,34 @@ def update_inverted_index(word, isbn_list):
     except requests.exceptions.RequestException as e:
         print(f"Request error: {e}")
 
-# Main function per eseguire il processo
-def main(isbn_list):
-    for isbn in isbn_list:
+# Funzione principale per eseguire il processo
+def main():
+    # Connessione al server MongoDB
+    client = MongoClient('mongodb://libreria1:27017,libreria2:27017,libreria3:27017/?replicaSet=ReplicaSetItalia')  # Assicurati di sostituire con il tuo URI MongoDB se necessario
+
+    # Seleziona il database e la collezione
+    db = client['lib-ita']  # Sostituisci con il nome del tuo database
+    collection = db['libri']  # La collezione che contiene i tuoi libri
+
+    # Trova tutti i documenti nella collezione "libri" e raccogli gli ISBN
+    isbn_list = []
+    for document in collection.find({}, {"ISBN": 1, "_id": 0}):
+        if "ISBN" in document:
+            if isinstance(document["ISBN"], list):
+                isbn_list.extend(document["ISBN"])
+            else:
+                isbn_list.append(document["ISBN"])
+
+    # Rimuovi duplicati
+    unique_isbn_list = list(set(isbn_list))
+
+    # Stampa la lista degli ISBN
+    print("Lista degli ISBN trovati nella collezione 'libri':")
+    for isbn in unique_isbn_list:
+        print(isbn)
+
+    # Processa ciascun ISBN
+    for isbn in unique_isbn_list:
         # Ottieni l'abstract da Open Library per l'ISBN corrente
         abstract = get_abstract_from_isbn(isbn)
         if not abstract:
@@ -95,12 +121,14 @@ def main(isbn_list):
         for word in inverted_index:
             update_inverted_index(word, [isbn])  # Passiamo una lista con un solo ISBN per ciascuna parola
 
-    print(f"Inverted index successfully updated in Riak for ISBN list: {isbn_list}")
+    print(f"Inverted index successfully updated in Riak for ISBN list: {unique_isbn_list}")
+
+    # Chiudi la connessione
+    client.close()
 
 # Esempio di utilizzo
 if __name__ == "__main__":
     nltk.download('punkt')
     nltk.download('stopwords')
     
-    isbn_list = ["9780061120084","9780451524935","9780316769488","9780743273565","9780747532743","9780141439518","9780618260300","9780544003415","9780439023481","9780307474278"]  # Lista di ISBN desiderati
-    main(isbn_list)
+    main()

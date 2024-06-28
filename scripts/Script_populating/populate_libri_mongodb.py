@@ -4,8 +4,8 @@ from faker import Faker
 import random
 
 # Connetti a MongoDB
-client = MongoClient('mongodb://localhost:27025/?directConnection=true')
-db = client['lib-fra']
+client = MongoClient('mongodb://libreria1:27017,libreria2:27017,libreria3:27017/?replicaSet=ReplicaSetItalia')
+db = client['lib-ita']
 collection = db['libri']
 
 # Generatore di dati fittizi
@@ -38,7 +38,28 @@ def get_books_data(isbn_list):
     return books_data
 
 # Lista di ISBN per esempio
-isbn_list = ["0451526538", "0451524934", "9780140328721", "9780439139595", "9780439064873", "9780439136365"]
+isbn_list = [
+    "9780316769488",  # The Catcher in the Rye by J.D. Salinger
+    "9780061120084",  # To Kill a Mockingbird by Harper Lee
+    "9780743273565",  # The Great Gatsby by F. Scott Fitzgerald
+    "9780747532743",  # Harry Potter and the Philosopher's Stone by J.K. Rowling
+    "9780439139601",  # Harry Potter and the Goblet of Fire by J.K. Rowling
+    "9780439064866",  # Harry Potter and the Chamber of Secrets by J.K. Rowling
+    "9780439139595",  # Harry Potter and the Prisoner of Azkaban by J.K. Rowling
+    "9780618260300",  # The Hobbit by J.R.R. Tolkien
+    "9780544003415",  # The Lord of the Rings by J.R.R. Tolkien
+    "9780451524935",  # 1984 by George Orwell
+    "9780451526342",  # Animal Farm by George Orwell
+    "9780141439518",  # Pride and Prejudice by Jane Austen
+    "9780142437247",  # Moby-Dick by Herman Melville
+    "9780140328721",  # The BFG by Roald Dahl
+    "9780307474278",  # The Road by Cormac McCarthy
+    "9780743273565",  # The Great Gatsby by F. Scott Fitzgerald
+    "9780385737951",  # Looking for Alaska by John Green
+    "9780316015844",  # Twilight by Stephenie Meyer
+    "9780307277671",  # The Kite Runner by Khaled Hosseini
+    "9780812981605",  # The Martian by Andy Weir
+]
 
 books_data = get_books_data(isbn_list)
 

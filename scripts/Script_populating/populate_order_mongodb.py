@@ -5,7 +5,7 @@ import random
 import datetime
 
 # Connetti a MongoDB
-client = MongoClient('mongodb://localhost:27019/?directConnection=true')
+client = MongoClient('mongodb://libreria1:27017,libreria2:27017,libreria3:27017/?replicaSet=ReplicaSetItalia')
 db = client['lib-ita'] 
 
 # Collezioni
