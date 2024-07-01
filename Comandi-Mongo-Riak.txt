@@ -86,7 +86,7 @@ mongodb://libreria7:27017,libreria8:27017,libreria9:27017/?replicaSet=ReplicaSet
 ### MODIFICARE PRIORITA' NODI MONGO ###
 # da cmd
 
-docker exec -it <nome_nodo> mongosh
+docker exec -it libreria1 mongosh  #sostituire libreria1 con il nodo master attuale
 
 config = rs.conf()
 
@@ -115,60 +115,9 @@ docker exec -it Italia1 riak-admin cluster join riak@$ITALIA3_IP
 docker exec -it Italia1 riak-admin cluster plan
 docker exec -it Italia1 riak-admin cluster commit
 
-### RIPETERE CON UNA NUOVA RETE PER I CLUSTER FRANCIA E GERMANIA ###
-
---------------------Mongo read concern---------------------------------
-
-MongoDB supporta diversi livelli di read concern, come "local", "majority", e "linearizable".
+### RIPETERE CON UNA NUOVA RETE PER I CLUSTER FRANCIA E GERMANIA ### 
 
 
-from pymongo import ReadConcern
-
-# Connessione con read concern
-client = MongoClient(uri, readConcernLevel='majority')
-
-db = client['lib-ita']
-collection = db['libri']
-
-
-"local"
-The query returns data from the instance with no guarantee that the data has been written to a majority of the replica set members (i.e. may be rolled back).
-
-Default for reads against the primary and secondaries.
-
-Availability: Read concern "local" is available for use with or without causally consistent sessions and transactions.
-
-For more information, see the "local" reference page.
-
-"available"
-The query returns data from the instance with no guarantee that the data has been written to a majority of the replica set members (i.e. may be rolled back).
-
-Availability: Read concern "available" is unavailable for use with causally consistent sessions and transactions.
-
-For sharded clusters, "available" read concern provides the lowest latency reads possible among the various read concerns. However, this comes at the expense of consistency as "available" read concern can return orphaned documents when reading from a sharded collection. To avoid the risk of returning orphaned documents when reading from sharded collections, use a different read concern such as read concern "local".
-
-For more information, see the "available" reference page.
-
-"majority"
-The query returns the data that has been acknowledged by a majority of the replica set members. The documents returned by the read operation are durable, even in the event of failure.
-
-To fulfill read concern "majority", the replica set member returns data from its in-memory view of the data at the majority-commit point. As such, read concern "majority" is comparable in performance cost to other read concerns.
-
-Availability:
-
-Read concern "majority" is available for use with or without causally consistent sessions and transactions.
-
-Requirements: To use read concern level of "majority", replica sets must use WiredTiger storage engine.
-
-
-db.adminCommand(
-  {
-    setDefaultRWConcern : 1,
-    defaultReadConcern: { 'linearizable' },
-    defaultWriteConcern: { 2 },
-    writeConcern: { 2 }
-  }
-)
 
 
 
