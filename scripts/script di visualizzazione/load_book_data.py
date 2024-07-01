@@ -33,10 +33,9 @@ def get_book_data_from_api(isbn):
 
 def get_book_data_from_mongodb(isbn):
     client = MongoClient('mongodb://localhost:27017/?directConnection=true')
-    db = client['lib-ita']  # Sostituisci con il nome del tuo database
+    db = client['lib-ita']
     collection = db['libri']
     
-    # Trova il libro con l'ISBN specificato all'interno di identifiers.isbn_10
     book_data = collection.find_one({'ISBN': isbn})
     if book_data:
         price = book_data.get('prezzo', 'N/A')

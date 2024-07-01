@@ -13,7 +13,7 @@ if 'docs' in data:
     books = data['docs']
     if books:
         first_book = books[0]
-        book_id = first_book['key']  # ad esempio, "/works/OL7353617M"
+        book_id = first_book['key']  # es. "/works/OL7353617M"
         print(f"Book ID: {book_id}")
         
 book_url = f"https://openlibrary.org{book_id}.json"

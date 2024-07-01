@@ -2,14 +2,14 @@ import requests
 from pymongo import MongoClient
 from bson import ObjectId
 
-# URL di connessione a MongoDB con replica set specificato
+
 mongodb_url = 'mongodb://libreria1:27017,libreria2:27017,libreria3:27017/?replicaSet=ReplicaSetItalia'
 riak_url = 'http://localhost:8098'
 
 # Funzione per ottenere la lista di ISBN dai libri con payment_made=True da MongoDB
 def get_isbn_list_from_mongodb():
     client = MongoClient(mongodb_url)
-    database = client['lib-ita']  # Utilizza il database di default (puoi specificare un database diverso se necessario)
+    database = client['lib-ita']
     ordini_collection = database['ordini']  # Collezione degli ordini
     libri_collection = database['libri']  # Collezione dei libri
 

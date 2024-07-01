@@ -87,8 +87,8 @@ def main():
     client = MongoClient('mongodb://libreria1:27017,libreria2:27017,libreria3:27017/?replicaSet=ReplicaSetItalia')  # Assicurati di sostituire con il tuo URI MongoDB se necessario
 
     # Seleziona il database e la collezione
-    db = client['lib-ita']  # Sostituisci con il nome del tuo database
-    collection = db['libri']  # La collezione che contiene i tuoi libri
+    db = client['lib-ita'] 
+    collection = db['libri']  
 
     # Trova tutti i documenti nella collezione "libri" e raccogli gli ISBN
     isbn_list = []
